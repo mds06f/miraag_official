@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090909" />
+  <meta name="description" content="MIRAAG — Bollyrock × Indian Classical Rock Fusion. Where tradition meets distortion." />
+  <title>MIRAAG — Where Tradition Meets Distortion</title>
+
+  <!-- Tailwind CSS CDN: suitable for a simple static starter website. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#090909",
+            charcoal: "#171717",
+            crimson: "#9D2929",
+            gold: "#C3A875",
+            ivory: "#F4F0E9"
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Inter", "Arial", "sans-serif"],
+            condensed: ["Oswald", "Impact", "sans-serif"]
+          },
+          letterSpacing: {
+            cinema: ".22em"
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { background:#090909; color:#F4F0E9; }
+    .hero-overlay { background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.58) 48%,rgba(0,0,0,.20) 100%),linear-gradient(0deg,#090909 0%,transparent 35%); }
+    .section-kicker::before { content:""; display:inline-block; width:34px; height:1px; background:#C3A875; margin:0 13px 4px 0; }
+    .outline-text { -webkit-text-stroke:1px rgba(244,240,233,.55); color:transparent; }
+    .image-placeholder { background:radial-gradient(ellipse at 50% 35%,#3a2925 0%,#1b1716 42%,#111 100%); }
+    .grain { position:relative; }
+    .grain::after { content:""; pointer-events:none; position:absolute; inset:0; opacity:.08; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E"); }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity .8s ease,transform .8s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .nav-link { position:relative; }
+    .nav-link::after { content:""; position:absolute; left:0; bottom:-7px; height:1px; width:0; background:#C3A875; transition:width .25s ease; }
+    .nav-link:hover::after { width:100%; }
+    .member-card img, .gallery-item img { transition:transform .7s cubic-bezier(.2,.7,.2,1); }
+    .member-card:hover img, .gallery-item:hover img { transform:scale(1.045); }
+    .marquee-track { animation:marquee 28s linear infinite; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto !important; }
+      *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-crimson selection:text-ivory">
+  <!-- Navigation -->
+  <header class="fixed top-0 z-50 w-full border-b border-white/10 bg-ink/80 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-10" aria-label="Main navigation">
+      <a href="#home" class="font-condensed text-2xl font-semibold tracking-[.28em] text-ivory">MIRAAG<span class="text-gold">.</span></a>
+      <div class="hidden items-center gap-8 text-[10px] font-medium uppercase tracking-[.2em] text-white/75 lg:flex">
+        <a class="nav-link hover:text-gold" href="#story">Our Story</a>
+        <a class="nav-link hover:text-gold" href="#band">The Band</a>
+        <a class="nav-link hover:text-gold" href="#music">Music</a>
+        <a class="nav-link hover:text-gold" href="#gallery">Gallery</a>
+        <a class="nav-link hover:text-gold" href="#live">Live</a>
+        <a class="nav-link hover:text-gold" href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="hidden border border-gold/70 px-5 py-2.5 text-[9px] font-semibold uppercase tracking-[.2em] text-gold transition hover:bg-gold hover:text-ink lg:inline-flex">Book MIRAAG</a>
+      <button id="menuButton" class="text-ivory lg:hidden" aria-label="Open navigation" aria-expanded="false">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobileMenu" class="hidden border-t border-white/10 bg-ink px-6 py-5 lg:hidden">
+      <div class="flex flex-col gap-5 text-xs uppercase tracking-[.2em] text-white/75">
+        <a href="#story">Our Story</a><a href="#band">The Band</a><a href="#music">Music</a>
+        <a href="#gallery">Gallery</a><a href="#live">Live</a><a href="#contact">Contact / Booking</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero: replace assets/band-hero.jpg with an actual wide band photograph. -->
+    <section id="home" class="grain relative flex min-h-[92svh] items-end overflow-hidden pt-24">
+      <div class="absolute inset-0">
+        <img src="assets/band-hero.jpg" alt="MIRAAG band photograph" class="h-full w-full object-cover object-center" onerror="this.style.display='none'; this.parentElement.classList.add('image-placeholder');" />
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+      <div class="relative mx-auto w-full max-w-7xl px-5 pb-24 pt-28 lg:px-10 lg:pb-32">
+        <p class="section-kicker mb-6 text-[10px] uppercase tracking-cinema text-gold">Bollyrock × Indian Classical Rock Fusion</p>
+        <h1 class="font-condensed text-[clamp(4.5rem,15vw,12rem)] font-semibold leading-[.78] tracking-[.02em]">MIRAAG</h1>
+        <p class="mt-7 max-w-xl font-display text-2xl italic text-ivory/90 md:text-3xl">Where tradition meets distortion.</p>
+        <p class="mt-5 max-w-lg text-xs leading-7 tracking-wide text-white/65 md:text-sm">Timeless ragas. Electric energy. A sound shaped by heritage, experimentation and the freedom to evolve.</p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href="#story" class="bg-crimson px-7 py-3.5 text-[10px] font-semibold uppercase tracking-[.2em] transition hover:bg-[#b33a3a]">Discover MIRAAG</a>
+          <a href="#contact" class="border border-white/40 px-7 py-3.5 text-[10px] font-semibold uppercase tracking-[.2em] transition hover:border-gold hover:text-gold">Book the Band</a>
+        </div>
+      </div>
+      <div class="absolute bottom-8 right-6 hidden text-[9px] uppercase tracking-[.25em] text-white/40 [writing-mode:vertical-rl] lg:block">Scroll to explore</div>
+    </section>
+
+    <!-- Moving brand line -->
+    <div class="overflow-hidden border-y border-white/10 bg-[#101010] py-5">
+      <div class="marquee-track flex w-max items-center gap-10 whitespace-nowrap font-condensed text-sm tracking-[.25em] text-white/50">
+        <span>TRADITION</span><span class="text-crimson">✳</span><span>DISTORTION</span><span class="text-gold">✳</span><span>DEVOTION</span><span class="text-crimson">✳</span><span>REBELLION</span><span class="text-gold">✳</span><span>TRADITION</span><span class="text-crimson">✳</span><span>DISTORTION</span><span class="text-gold">✳</span><span>DEVOTION</span><span class="text-crimson">✳</span><span>REBELLION</span><span class="text-gold">✳</span>
+      </div>
+    </div>
+
+    <!-- Story -->
+    <section id="story" class="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-36">
+      <div class="grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-24">
+        <div class="reveal">
+          <p class="section-kicker text-[10px] uppercase tracking-cinema text-gold">The philosophy</p>
+          <h2 class="mt-7 font-display text-6xl leading-[.95] md:text-7xl">An old soul.<br><span class="italic text-gold">A new sound.</span></h2>
+          <p class="mt-8 max-w-sm text-xs leading-7 text-white/50">MIRAAG is born from the meeting of two timeless ideas: the spirit of Mirabai and the soul of the raag.</p>
+        </div>
+        <div class="reveal space-y-7 text-sm leading-8 text-white/65 md:text-base">
+          <p><span class="font-display text-3xl italic text-ivory">MIRA</span> draws inspiration from Mirabai, whose songs carried the language of love, devotion and artistic freedom. Her music was more than performance: it was an expression of an inner world.</p>
+          <p><span class="font-display text-3xl italic text-ivory">RAAG</span> is the living architecture of Indian classical music — a melodic world with its own character, emotion and time.</p>
+          <p>MIRAAG brings these inspirations into a contemporary musical space. Classical melodies meet electric guitars; the depth of Indian musical heritage encounters the raw energy of rock. The result is not a departure from tradition, but a new way of carrying its spirit forward.</p>
+          <p class="border-l border-crimson pl-5 font-display text-2xl italic leading-snug text-ivory md:text-3xl">“A meeting of devotion and rebellion, heritage and reinvention.”</p>
+          <p class="text-[10px] font-semibold uppercase tracking-[.2em] text-gold">We don't just perform music. We reinvent its legacy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Band -->
+    <section id="band" class="border-y border-white/10 bg-[#101010] py-24 lg:py-32">
+      <div class="mx-auto max-w-7xl px-5 lg:px-10">
+        <div class="reveal mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div><p class="section-kicker text-[10px] uppercase tracking-cinema text-gold">The people behind the sound</p><h2 class="mt-5 font-display text-6xl md:text-7xl">The Band<span class="text-crimson">.</span></h2></div>
+          <p class="max-w-sm text-xs leading-6 text-white/50">Five musicians. One evolving sound. Member details and portraits can be added below.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+          <!-- Replace portrait files, names and instruments with confirmed band details. -->
+          <article class="member-card reveal group">
+            <div class="image-placeholder aspect-[3/4] overflow-hidden"><img src="assets/member-01.jpg" alt="Band member 1 portrait" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="flex h-full items-end p-4"><span class="text-[9px] uppercase tracking-widest text-white/35">Portrait 01</span></div></div>
+            <p class="mt-4 font-display text-2xl">Member One</p><p class="mt-1 text-[9px] uppercase tracking-[.18em] text-gold">Lead Vocals</p>
+          </article>
+          <article class="member-card reveal group">
+            <div class="image-placeholder aspect-[3/4] overflow-hidden"><img src="assets/member-02.jpg" alt="Band member 2 portrait" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="flex h-full items-end p-4"><span class="text-[9px] uppercase tracking-widest text-white/35">Portrait 02</span></div></div>
+            <p class="mt-4 font-display text-2xl">Member Two</p><p class="mt-1 text-[9px] uppercase tracking-[.18em] text-gold">Lead Guitar</p>
+          </article>
+          <article class="member-card reveal group">
+            <div class="image-placeholder aspect-[3/4] overflow-hidden"><img src="assets/member-03.jpg" alt="Band member 3 portrait" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="flex h-full items-end p-4"><span class="text-[9px] uppercase tracking-widest text-white/35">Portrait 03</span></div></div>
+            <p class="mt-4 font-display text-2xl">Member Three</p><p class="mt-1 text-[9px] uppercase tracking-[.18em] text-gold">Bass Guitar</p>
+          </article>
+          <article class="member-card reveal group">
+            <div class="image-placeholder aspect-[3/4] overflow-hidden"><img src="assets/member-04.jpg" alt="Band member 4 portrait" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="flex h-full items-end p-4"><span class="text-[9px] uppercase tracking-widest text-white/35">Portrait 04</span></div></div>
+            <p class="mt-4 font-display text-2xl">Member Four</p><p class="mt-1 text-[9px] uppercase tracking-[.18em] text-gold">Drums & Percussion</p>
+          </article>
+          <article class="member-card reveal group col-span-2 md:col-span-1">
+            <div class="image-placeholder aspect-[3/4] overflow-hidden"><img src="assets/member-05.jpg" alt="Band member 5 portrait" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="flex h-full items-end p-4"><span class="text-[9px] uppercase tracking-widest text-white/35">Portrait 05</span></div></div>
+            <p class="mt-4 font-display text-2xl">Member Five</p><p class="mt-1 text-[9px] uppercase tracking-[.18em] text-gold">Keys & Production</p>
+          </article>
+        </div>
+        <p class="mt-8 text-[10px] text-white/35">Note: Replace the sample names and role labels with your actual lineup before publishing.</p>
+      </div>
+    </section>
+
+    <!-- Music -->
+    <section id="music" class="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-32">
+      <div class="reveal grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p class="section-kicker text-[10px] uppercase tracking-cinema text-gold">The sound</p>
+          <h2 class="mt-6 font-display text-6xl leading-none md:text-7xl">Something<br><span class="italic text-gold">is taking shape.</span></h2>
+          <p class="mt-7 max-w-md text-sm leading-7 text-white/55">New interpretations, original compositions and unexpected musical intersections. The MIRAAG sound is in the making.</p>
+          <span class="mt-8 inline-flex border border-crimson/70 px-5 py-2 text-[9px] uppercase tracking-[.2em] text-crimson">Music coming soon</span>
+        </div>
+        <div class="relative flex min-h-[310px] items-center justify-center overflow-hidden border border-white/10 bg-[#111] p-10 text-center">
+          <div class="absolute h-64 w-64 rounded-full border border-gold/15"></div><div class="absolute h-48 w-48 rounded-full border border-crimson/20"></div>
+          <div class="relative"><p class="font-condensed text-5xl tracking-[.2em] text-ivory/90">MIRAAG</p><p class="mt-4 text-[9px] uppercase tracking-[.3em] text-gold">The sound is taking shape</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="border-y border-white/10 bg-[#101010] py-24 lg:py-32">
+      <div class="mx-auto max-w-7xl px-5 lg:px-10">
+        <div class="reveal mb-10"><p class="section-kicker text-[10px] uppercase tracking-cinema text-gold">Frames & moments</p><h2 class="mt-5 font-display text-6xl md:text-7xl">Gallery<span class="text-crimson">.</span></h2></div>
+        <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <button class="gallery-item reveal col-span-2 row-span-2 overflow-hidden text-left" data-image="assets/gallery-01.jpg" aria-label="Open gallery image 1"><div class="image-placeholder aspect-square md:aspect-auto md:h-full"><img src="assets/gallery-01.jpg" alt="MIRAAG gallery image 1" class="h-full min-h-64 w-full object-cover" onerror="this.style.display='none'"><div class="flex min-h-64 items-end p-5 text-[9px] uppercase tracking-widest text-white/35">Add a band photograph</div></div></button>
+          <button class="gallery-item reveal overflow-hidden text-left" data-image="assets/gallery-02.jpg" aria-label="Open gallery image 2"><div class="image-placeholder aspect-square"><img src="assets/gallery-02.jpg" alt="MIRAAG gallery image 2" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="p-4 text-[9px] uppercase tracking-widest text-white/35">Add a live moment</div></div></button>
+          <button class="gallery-item reveal overflow-hidden text-left" data-image="assets/gallery-03.jpg" aria-label="Open gallery image 3"><div class="image-placeholder aspect-square"><img src="assets/gallery-03.jpg" alt="MIRAAG gallery image 3" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="p-4 text-[9px] uppercase tracking-widest text-white/35">Add a rehearsal photo</div></div></button>
+          <button class="gallery-item reveal overflow-hidden text-left" data-image="assets/gallery-04.jpg" aria-label="Open gallery image 4"><div class="image-placeholder aspect-square"><img src="assets/gallery-04.jpg" alt="MIRAAG gallery image 4" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="p-4 text-[9px] uppercase tracking-widest text-white/35">Add a backstage photo</div></div></button>
+          <button class="gallery-item reveal overflow-hidden text-left" data-image="assets/gallery-05.jpg" aria-label="Open gallery image 5"><div class="image-placeholder aspect-square"><img src="assets/gallery-05.jpg" alt="MIRAAG gallery image 5" class="h-full w-full object-cover" onerror="this.style.display='none'"><div class="p-4 text-[9px] uppercase tracking-widest text-white/35">Add another moment</div></div></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live -->
+    <section id="live" class="mx-auto max-w-7xl px-5 py-24 lg:px-10 lg:py-28">
+      <div class="reveal flex flex-col justify-between gap-8 border-b border-white/10 pb-10 md:flex-row md:items-end">
+        <div><p class="section-kicker text-[10px] uppercase tracking-cinema text-gold">On stage</p><h2 class="mt-5 font-display text-6xl md:text-7xl">Live<span class="text-crimson">.</span></h2></div>
+        <p class="max-w-md text-sm leading-7 text-white/50">No upcoming dates announced yet. Check back here for MIRAAG's next performance.</p>
+      </div>
+      <div class="reveal py-12 text-center"><p class="font-display text-3xl italic text-white/55">The next chapter will be played live.</p><p class="mt-3 text-[9px] uppercase tracking-[.25em] text-gold">Upcoming shows — to be announced</p></div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="relative overflow-hidden border-t border-white/10 bg-[#111] py-24 lg:py-32">
+      <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full border border-gold/10"></div><div class="absolute -right-12 -top-12 h-72 w-72 rounded-full border border-crimson/10"></div>
+      <div class="relative mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2 lg:px-10">
+        <div class="reveal"><p class="section-kicker text-[10px] uppercase tracking-cinema text-gold">Let's make some noise</p><h2 class="mt-6 font-display text-6xl leading-none md:text-8xl">Bring the<br><span class="italic text-gold">sound alive.</span></h2><p class="mt-7 max-w-md text-sm leading-7 text-white/55">For live performances, collaborations and booking enquiries, get in touch with MIRAAG.</p></div>
+        <div class="reveal flex flex-col justify-center gap-7">
+          <!-- Replace these placeholder links with the band's official contact details. -->
+          <div class="border-b border-white/10 pb-5"><p class="text-[9px] uppercase tracking-[.2em] text-gold">Booking enquiries</p><a href="mailto:YOUR-BOOKING-EMAIL@example.com" class="mt-2 inline-block break-all font-display text-2xl hover:text-gold md:text-3xl">YOUR-BOOKING-EMAIL@example.com</a></div>
+          <div class="border-b border-white/10 pb-5"><p class="text-[9px] uppercase tracking-[.2em] text-gold">Instagram</p><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block font-display text-2xl hover:text-gold md:text-3xl">@yourbandhandle</a></div>
+          <div class="flex flex-wrap gap-5 text-[10px] uppercase tracking-[.18em] text-white/55"><a class="hover:text-gold" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a class="hover:text-gold" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Spotify ↗</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-ink px-5 py-8">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-[9px] uppercase tracking-[.18em] text-white/35 md:flex-row md:items-center lg:px-5">
+      <a href="#home" class="font-condensed text-xl tracking-[.25em] text-ivory">MIRAAG<span class="text-gold">.</span></a>
+      <p>© <span id="year"></span> MIRAAG. All rights reserved.</p>
+      <a href="login.html">Band login</a>
+    </div>
+  </footer>
+
+  <!-- Gallery lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/95 p-5" role="dialog" aria-modal="true" aria-label="Gallery image">
+    <button id="closeLightbox" class="absolute right-6 top-6 text-3xl text-white" aria-label="Close image">×</button>
+    <img id="lightboxImage" src="" alt="Expanded MIRAAG gallery photograph" class="max-h-[85vh] max-w-full object-contain">
+  </div>
+
+  <script>
+    // Mobile navigation
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Reveal sections as they enter the viewport
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Gallery lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const image = item.querySelector('img');
+        if (!image || !image.getAttribute('src') || !image.complete || image.naturalWidth === 0) return;
+        lightboxImage.src = image.src;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+      });
+    });
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      lightboxImage.src = '';
+    }
+    document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090909" />
+  <title>MIRAAG — Member Login</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#090909",
+            panel: "#141414",
+            crimson: "#9D2929",
+            gold: "#C3A875",
+            ivory: "#F4F0E9"
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Inter", "Arial", "sans-serif"],
+            condensed: ["Oswald", "Impact", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      background: #090909;
+      color: #F4F0E9;
+    }
+
+    .login-input {
+      width: 100%;
+      background: #0b0b0b;
+      border: 1px solid #383838;
+      padding: 15px 14px;
+      color: #F4F0E9;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .login-input::placeholder { color: #686868; }
+
+    .login-input:focus {
+      border-color: #C3A875;
+      box-shadow: 0 0 0 2px rgba(195,168,117,.09);
+    }
+
+    .login-input.invalid {
+      border-color: #b83c3c;
+      box-shadow: 0 0 0 2px rgba(184,60,60,.12);
+    }
+
+    .login-card.shake {
+      animation: shake .42s ease;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      15%,45%,75% { transform: translateX(-8px); }
+      30%,60%,90% { transform: translateX(8px); }
+    }
+
+    .grain:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .07;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    }
+
+    .gold-line {
+      background: linear-gradient(90deg, transparent, #C3A875, transparent);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen font-sans antialiased">
+
+<main class="grain relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-12">
+
+  <div class="absolute -left-40 top-1/4 h-96 w-96 rounded-full border border-gold/10"></div>
+  <div class="absolute -left-24 top-[30%] h-64 w-64 rounded-full border border-crimson/15"></div>
+  <div class="absolute -bottom-48 -right-32 h-[32rem] w-[32rem] rounded-full border border-gold/10"></div>
+
+  <a href="index.html" class="absolute left-6 top-6 z-10 font-condensed text-xl tracking-[.25em] text-ivory md:left-10 md:top-8">
+    MIRAAG<span class="text-gold">.</span>
+  </a>
+
+  <a href="index.html" class="absolute right-6 top-7 z-10 text-[9px] uppercase tracking-[.18em] text-white/40 transition hover:text-gold md:right-10">
+    ← Back to website
+  </a>
+
+  <section id="loginCard" class="login-card relative z-10 w-full max-w-[440px] border border-white/10 bg-[#111]/95 px-6 py-9 shadow-2xl shadow-black/50 backdrop-blur-xl sm:px-10 sm:py-11">
+
+    <div class="mb-8 text-center">
+      <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 text-gold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3 5 6v5c0 4.5 2.8 8.2 7 10 4.2-1.8 7-5.5 7-10V6l-7-3Z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+
+      <p class="text-[9px] uppercase tracking-[.28em] text-gold">Restricted access</p>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl">Member Login</h1>
+      <p class="mt-3 text-xs leading-6 text-white/45">
+        MIRAAG Admin Studio is reserved for authorised band members.
+      </p>
+    </div>
+
+    <div class="gold-line mb-7 h-px w-full opacity-50"></div>
+
+    <form id="loginForm" novalidate>
+
+      <div class="mb-5">
+        <label for="email" class="mb-2 block text-[9px] uppercase tracking-[.2em] text-white/65">
+          Email address
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="username"
+          placeholder="example@domain.com"
+          class="login-input"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <div class="mb-2 flex items-center justify-between gap-3">
+          <label for="password" class="block text-[9px] uppercase tracking-[.2em] text-white/65">
+            Password
+          </label>
+          <button id="togglePassword" type="button" class="text-[9px] uppercase tracking-[.15em] text-gold/80 hover:text-gold">
+            Show
+          </button>
+        </div>
+
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+          class="login-input"
+          required
+        />
+      </div>
+
+      <div class="mb-6 space-y-2">
+        <p class="text-[9px] leading-5 text-white/35">
+          Password requirement: at least 8 characters, including uppercase and lowercase letters, a number and a special character.
+        </p>
+
+        <div id="passwordHint" class="hidden text-[10px] text-crimson" aria-live="polite">
+          Password does not meet the required format.
+        </div>
+      </div>
+
+      <div id="errorMessage" class="mb-4 hidden border border-crimson/50 bg-crimson/10 px-3 py-3 text-center text-[10px] font-semibold tracking-[.13em] text-[#f0aaaa]" role="alert">
+        INCORRECT EMAIL / PASSWORD
+      </div>
+
+      <button type="submit" class="group flex w-full items-center justify-center gap-3 bg-crimson px-5 py-4 text-[10px] font-semibold uppercase tracking-[.22em] transition hover:bg-[#b43a3a]">
+        Enter Admin Studio
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/>
+        </svg>
+      </button>
+
+    </form>
+
+    <p class="mt-7 text-center text-[9px] uppercase tracking-[.14em] text-white/25">
+      MIRAAG · Authorised members only
+    </p>
+
+  </section>
+
+  <p class="absolute bottom-5 left-0 right-0 z-10 text-center text-[8px] uppercase tracking-[.2em] text-white/20">
+    Where tradition meets distortion.
+  </p>
+
+</main>
+
+<script>
+  /*
+    FRONTEND DEMO ONLY.
+    This is not secure production authentication.
+    Credentials are visible in the browser source.
+  */
+
+  const ADMIN_EMAIL = "example@domain.com";
+  const ADMIN_PASSWORD = "ChangeMe@123";
+
+  // Must match the actual admin panel filename.
+  const ADMIN_PAGE = "admin.html";
+
+  const form = document.getElementById("loginForm");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const card = document.getElementById("loginCard");
+  const errorMessage = document.getElementById("errorMessage");
+  const passwordHint = document.getElementById("passwordHint");
+  const togglePassword = document.getElementById("togglePassword");
+
+  const strongPasswordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+  togglePassword.addEventListener("click", () => {
+    const reveal = passwordInput.type === "password";
+    passwordInput.type = reveal ? "text" : "password";
+    togglePassword.textContent = reveal ? "Hide" : "Show";
+  });
+
+  function markInvalid() {
+    errorMessage.classList.remove("hidden");
+    emailInput.classList.add("invalid");
+    passwordInput.classList.add("invalid");
+
+    card.classList.remove("shake");
+    void card.offsetWidth;
+    card.classList.add("shake");
+
+    window.setTimeout(() => {
+      card.classList.remove("shake");
+    }, 500);
+  }
+
+  [emailInput, passwordInput].forEach(input => {
+    input.addEventListener("input", () => {
+      input.classList.remove("invalid");
+      errorMessage.classList.add("hidden");
+    });
+  });
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    const emailLooksValid =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    const passwordIsStrong =
+      strongPasswordPattern.test(password);
+
+    passwordHint.classList.toggle(
+      "hidden",
+      passwordIsStrong || password.length === 0
+    );
+
+    if (
+      !emailLooksValid ||
+      !passwordIsStrong ||
+      email !== ADMIN_EMAIL ||
+      password !== ADMIN_PASSWORD
+    ) {
+      markInvalid();
+      return;
+    }
+
+    // Redirect only after successful validation.
+    window.location.href = ADMIN_PAGE;
+  });
+</script>
+
+</body>
+</html>
